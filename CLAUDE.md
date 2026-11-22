@@ -11,7 +11,7 @@ Les règles communes à tout le ClickUp du GDG (taille d'une tâche, échéance,
 - **Contexte, objectifs** : la liste ClickUp [Équipe B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712) et la description de chaque tâche. Pas de Doc projet pendant le défi.
 - **Stack et contrôles** : TODO (langage, outils, commande de tests et de lint)
 - **Périmètre, non négociable** : TODO (ce que le projet ne fait jamais ; ou retirer la ligne)
-- **Personnes** : Project Lead : Amar Idinarene (technical lead) ; équipe B du défi des nouveaux. Le Project Lead tranche les décisions techniques et fusionne ; le Chapter Lead signe le cadrage. D'autres personnes peuvent rejoindre : rien ne doit supposer qu'une seule personne travaille dessus.
+- **Personnes** : Project Lead : Amar Idinarene (technical lead) ; équipe B du défi des nouveaux. Pendant le défi, l'auteur d'une PR la fusionne lui-même une fois approuvée par quelqu'un de l'autre équipe ; le Project Lead tranche les décisions techniques ; le Chapter Lead signe le cadrage. D'autres personnes peuvent rejoindre : rien ne doit supposer qu'une seule personne travaille dessus.
 - **Langue** : échanges et ClickUp en français ; code, commits, PR et `README.md` en anglais.
 
 ## Où est quoi
@@ -111,7 +111,7 @@ Le JSON passé à `cu.sh` doit être valide : pour un texte long, le produire av
 3. **Vérifier**, et s'arrêter en le signalant si : la tâche est assignée à quelqu'un d'autre ; elle n'est pas `à faire` (ou `en cours`/`en revue` pour soi) ; une dépendance n'est pas `terminé` ; une autre session écrit les mêmes fichiers (`bash tools/git/tache.sh list`).
 4. **Prendre** : s'assigner, `en cours`, `[DÉBUT]`.
 5. **Travailler** dans son worktree. Toute question à l'humain passe par un QCM. Chaque décision devient un `[DÉCISION]`.
-6. **Finir** : tests verts, push, PR, `checks`, statut `en revue`, `[PR]`. La fusion reste au Project Lead.
+6. **Finir** : tests verts, push, PR, `checks`, statut `en revue`, `[PR]`. Une fois la PR approuvée par l'autre équipe, son auteur la fusionne.
 7. **Ranger** : supprimer les scripts temporaires et les artefacts de la session. Le worktree reste jusqu'à la fusion.
 8. **Rapport de fin**, toujours dans ce format :
 
@@ -152,7 +152,7 @@ Plusieurs sessions (humaines ou Claude) tournent en même temps. Le clone princi
 
 ### Fusion
 
-`main` se fusionne par PR, en squash seul, avec `checks` vert. Le Project Lead relit (`[VALIDÉ]` ou `[À REVOIR]`), fusionne (ou un agent, sur sa demande explicite), passe la tâche `terminé` avec son `[BILAN]`, puis `bash tools/git/tache.sh clean`. Conflit : `git fetch origin main && git rebase origin/main` dans le worktree, `git push --force-with-lease`.
+`main` se fusionne par PR, en squash seul, avec `checks` vert et l'approbation d'un membre de l'autre équipe (`[VALIDÉ]` ou `[À REVOIR]`). L'auteur de la PR la fusionne lui-même (ou un agent, sur sa demande explicite), passe la tâche `terminé` avec son `[BILAN]`, puis `bash tools/git/tache.sh clean`. Conflit : `git fetch origin main && git rebase origin/main` dans le worktree, `git push --force-with-lease`.
 
 Sur un dépôt privé de l'organisation GDG-EPITA (plan Free), GitHub n'applique pas la protection de `main` : ces règles tiennent par discipline, et `checks` reste obligatoire avant toute fusion.
 
