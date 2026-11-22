@@ -1,0 +1,11 @@
+# Relecture demandée automatiquement (CLAUDE.md). La dernière règle qui correspond l'emporte.
+# Lister tout le monde : GitHub ne demande jamais la relecture à l'auteur de la PR.
+# La relecture est demandée, pas exigée : main ne bloque que sur le check `checks`.
+*               @Amaridi
+
+# Règles communes.
+/.github/       @Amaridi
+/CLAUDE.md      @Amaridi
+/.claude/       @Amaridi
+
+# Zones partagées (CLAUDE.md) : TODO

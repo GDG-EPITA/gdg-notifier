@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Tâches du projet (ClickUp)
+    url: https://app.clickup.com
+    about: Les tâches du projet et le journal vivent dans ClickUp. Une issue ne sert qu'à signaler un bug.
