@@ -8,7 +8,7 @@ Les règles communes à tout le ClickUp du GDG (taille d'une tâche, échéance,
 
 ## Le projet (le minimum pour travailler)
 
-- **Contexte, objectifs, fiche de cadrage** : Doc ClickUp [GDG Notifier](https://app.clickup.com), page « Projet ». À lire en début de session.
+- **Contexte, objectifs** : la liste ClickUp [Équipe B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712) et la description de chaque tâche. Pas de Doc projet pendant le défi.
 - **Stack et contrôles** : TODO (langage, outils, commande de tests et de lint)
 - **Périmètre, non négociable** : TODO (ce que le projet ne fait jamais ; ou retirer la ligne)
 - **Personnes** : Project Lead : Amar Idinarene (technical lead) ; équipe B du défi des nouveaux. Le Project Lead tranche les décisions techniques et fusionne ; le Chapter Lead signe le cadrage. D'autres personnes peuvent rejoindre : rien ne doit supposer qu'une seule personne travaille dessus.
@@ -18,8 +18,8 @@ Les règles communes à tout le ClickUp du GDG (taille d'une tâche, échéance,
 
 | Outil | Contient | Ne contient pas |
 |---|---|---|
-| **Tâches ClickUp** (espace Projets → dossier [GDG Notifier](https://app.clickup.com)) | les tâches, qui fait quoi, l'avancement, les décisions, les résultats en commentaires : **le journal du projet** | le code |
-| **Doc ClickUp** ([GDG Notifier](https://app.clickup.com)) | les documents : cadrage, spécifications, analyses longues, comptes rendus client | l'état des tâches |
+| **Tâches ClickUp** (espace Projets → dossier Défi nouveaux → liste [Équipe B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712)) | les tâches, qui fait quoi, l'avancement, les décisions, les résultats en commentaires : **le journal du projet** | le code |
+| **Doc ClickUp** (aucun pendant le défi) | les documents : cadrage, spécifications, analyses longues, comptes rendus client | l'état des tâches |
 | **Drive du GDG** | les fichiers lourds (maquettes, exports, pièces du client) ; leur lien va dans la tâche | — |
 | **GitHub** (`GDG-EPITA/gdg-notifier`) | le code, une branche et une PR par tâche, le `README.md` | la liste des tâches, des rapports, des notes |
 
