@@ -25,7 +25,7 @@ The rules shared by the whole GDG ClickUp (task size, due date, priority, status
 | **GDG Drive** | heavy files (mock-ups, exports, client files); their link goes in the task | — |
 | **GitHub** (`GDG-EPITA/gdg-notifier`) | the code, one branch and one PR per task, the `README.md` | the task list, reports, notes |
 
-The thread that ties the tools together is **the task id** (`CU-<id>`): in commits, PR titles and comments. The ids (workspace, space, folder, lists, Doc, pages) go in `tools/clickup/config.json`.
+The thread that ties the tools together is **the task id** (`CU-<id>`): in commits, PR titles and comments. The ids (workspace, space, folder, lists, Doc, pages) are in `tools/clickup/config.json`.
 
 ## ClickUp
 
@@ -48,7 +48,7 @@ The status names are the GDG workspace's, in French. What they mean here:
 
 | Status | Meaning | In this project |
 |---|---|---|
-| `à faire` | to do | Complete task sheet (below), dependencies cleared. Unassigned: free to take |
+| `à faire` | to do | Complete task sheet (below), due date set, dependencies cleared. Unassigned: free to take |
 | `en cours` | in progress | A branch and a worktree exist, **always an assignee** |
 | `bloqué` | blocked | ClickUp dependency or a `[BLOQUÉ]` comment |
 | `en revue` | in review | **Every code task goes through here**: PR open, `checks` green, `[PR]` comment |
@@ -83,7 +83,7 @@ A figure (performance, coverage, response time) cites the command and the commit
 
 ### Assignment and dependencies
 
-- An unassigned task in `à faire` is free. You take it by assigning yourself and moving it to `en cours`, in the same step.
+- An unassigned task in `à faire` is free. You take it by assigning yourself and moving it to `en cours`, in the same API call.
 - A task assigned to someone else is off-limits: ask with a `[QUESTION]`.
 - You drop a task by unassigning yourself, moving it back to `à faire` and leaving a `[POINT]` (branch pushed or not).
 - A waits for B: ClickUp dependency (`POST /task/<A>/dependency` with `{"depends_on":"<B>"}`) and a line in **Depends on**.
@@ -160,7 +160,7 @@ This repo is public: GitHub enforces the protection of `main` (PR, one approval,
 
 ### Validating a PR
 
-On request: run the **`verificateur`** subagent on the PR and post its report as a single GitHub comment (`<!-- verification -->`). Verdict REGRESSION or GOING IN CIRCLES: no merge. The verdict also goes as a comment on the task.
+On request: run the **`verificateur`** subagent on the PR and post its report as a single GitHub comment (`<!-- verification -->`). Verdict `RÉGRESSION` (regression) or `TOURNE EN ROND` (going in circles), as the subagent writes them: no merge. The verdict also goes as a comment on the task.
 
 ## Never, for an agent
 
@@ -170,5 +170,5 @@ On request: run the **`verificateur`** subagent on the PR and post its report as
 - Add a documentation, report or notes `.md` to the repo (unless a task asks for it, like `AGENTS.md`), or write state into this file.
 - Leave a temporary script in the repo.
 - `push --force` without `--with-lease`, or on a branch that is not yours; change the repo or ClickUp settings (statuses, lists, tags, members).
-- Put a key, a password or personal data in the code, a commit, a task or a comment.
+- Put a key, a password or the client's personal data in the code, a commit, a task or a comment.
 - Create more than 3 ClickUp tasks without agreement.

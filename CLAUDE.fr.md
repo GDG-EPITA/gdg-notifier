@@ -2,7 +2,7 @@
 
 > English version (reference, read by Claude Code): [`CLAUDE.md`](CLAUDE.md).
 
-Le bot qui annonce sur Slack les PR et les événements à venir du GDG. Projet du défi des nouveaux, équipe B (novembre-décembre 2026).
+Le bot qui annonce sur Slack et Discord les PR et les événements à venir du GDG. Projet du défi des nouveaux, équipe B (novembre-décembre 2026).
 
 Projet technique du GDG EPITA. Ce fichier contient les règles de travail, et rien d'autre. **Aucun contexte détaillé, statut, chiffre, résultat ni compte rendu ici ou dans un autre `.md` du dépôt** : tout ça vit dans le ClickUp du GDG (tâches, commentaires, Doc du projet).
 
@@ -14,7 +14,7 @@ Les règles communes à tout le ClickUp du GDG (taille d'une tâche, échéance,
 - **Stack et contrôles** : TODO (langage, outils, commande de tests et de lint)
 - **Périmètre, non négociable** : TODO (ce que le projet ne fait jamais ; ou retirer la ligne)
 - **Personnes** : Project Lead : Amar Idinarene (technical lead) ; équipe B du défi des nouveaux. Pendant le défi, l'auteur d'une PR la fusionne lui-même une fois approuvée par quelqu'un de l'autre équipe ; le Project Lead tranche les décisions techniques ; le Chapter Lead signe le cadrage. D'autres personnes peuvent rejoindre : rien ne doit supposer qu'une seule personne travaille dessus.
-- **Langue** : échanges et ClickUp en français ; code, commits, PR et `README.md` en anglais.
+- **Langue** : échanges et ClickUp en français ou en anglais ; code, commits, PR et `README.md` en anglais.
 
 ## Où est quoi
 
