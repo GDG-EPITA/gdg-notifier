@@ -1,172 +1,174 @@
 # GDG Notifier
 
-Le bot qui annonce sur Slack les PR et les événements à venir du GDG. Projet du défi des nouveaux, équipe B (novembre-décembre 2026).
+A bot that posts the GDG's pull requests and upcoming events to Slack and Discord. Newcomers' challenge project, team B (November–December 2026).
 
-Projet technique du GDG EPITA. Ce fichier contient les règles de travail, et rien d'autre. **Aucun contexte détaillé, statut, chiffre, résultat ni compte rendu ici ou dans un autre `.md` du dépôt** : tout ça vit dans le ClickUp du GDG (tâches, commentaires, Doc du projet).
+> Version française : [`CLAUDE.fr.md`](CLAUDE.fr.md). This English file is the reference: Claude Code reads this one.
 
-Les règles communes à tout le ClickUp du GDG (taille d'une tâche, échéance, priorité, statuts, journal, `[BILAN]`, tags) sont dans le skill `gdg-clickup` du dépôt `GDG-EPITA/gdg-clickup` : les lire avant de créer ou de modifier une tâche. Ce fichier ne garde que ce qui est propre à un projet de code.
+A GDG EPITA tech project. This file holds the working rules and nothing else. **No detailed context, status, figures, results or reports here or in any other `.md` of the repo**: all of that lives in the GDG ClickUp (tasks, comments, project Doc).
 
-## Le projet (le minimum pour travailler)
+The rules shared by the whole GDG ClickUp (task size, due date, priority, statuses, log, `[BILAN]`, tags) are in the `gdg-clickup` skill of the `GDG-EPITA/gdg-clickup` repo: read them before creating or editing a task. This file only keeps what is specific to a code project.
 
-- **Contexte, objectifs** : la liste ClickUp [Équipe B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712) et la description de chaque tâche. Pas de Doc projet pendant le défi.
-- **Stack et contrôles** : TODO (langage, outils, commande de tests et de lint)
-- **Périmètre, non négociable** : TODO (ce que le projet ne fait jamais ; ou retirer la ligne)
-- **Personnes** : Project Lead : Amar Idinarene (technical lead) ; équipe B du défi des nouveaux. Pendant le défi, l'auteur d'une PR la fusionne lui-même une fois approuvée par quelqu'un de l'autre équipe ; le Project Lead tranche les décisions techniques ; le Chapter Lead signe le cadrage. D'autres personnes peuvent rejoindre : rien ne doit supposer qu'une seule personne travaille dessus.
-- **Langue** : échanges et ClickUp en français ; code, commits, PR et `README.md` en anglais.
+## The project (the minimum to get started)
 
-## Où est quoi
+- **Context, goals**: the ClickUp list [Team B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712) and each task's description. No project Doc during the challenge.
+- **Stack and checks**: TODO (language, tools, test and lint command)
+- **Scope, non-negotiable**: TODO (what the project never does; or remove this line)
+- **People**: Project Lead: Amar Idinarene (technical lead); team B of the newcomers' challenge. During the challenge, a PR's author merges it themselves once someone from the other team has approved it; the Project Lead settles technical decisions; the Chapter Lead signs off the scope. Other people may join: nothing should assume only one person works on it.
+- **Language**: discussions and ClickUp in English or French; code, commits, PRs and `README.md` in English.
 
-| Outil | Contient | Ne contient pas |
+## Where things live
+
+| Tool | Holds | Does not hold |
 |---|---|---|
-| **Tâches ClickUp** (espace Projets → dossier Défi nouveaux → liste [Équipe B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712)) | les tâches, qui fait quoi, l'avancement, les décisions, les résultats en commentaires : **le journal du projet** | le code |
-| **Doc ClickUp** (aucun pendant le défi) | les documents : cadrage, spécifications, analyses longues, comptes rendus client | l'état des tâches |
-| **Drive du GDG** | les fichiers lourds (maquettes, exports, pièces du client) ; leur lien va dans la tâche | — |
-| **GitHub** (`GDG-EPITA/gdg-notifier`) | le code, une branche et une PR par tâche, le `README.md` | la liste des tâches, des rapports, des notes |
+| **ClickUp tasks** (space Projets → folder Défi nouveaux → list [Team B · gdg-notifier](https://app.clickup.com/90122158200/v/l/li/1500950000001712)) | tasks, who does what, progress, decisions, results as comments: **the project log** | the code |
+| **ClickUp Doc** (none during the challenge) | documents: scope, specs, long analyses, client reports | task status |
+| **GDG Drive** | heavy files (mock-ups, exports, client files); their link goes in the task | — |
+| **GitHub** (`GDG-EPITA/gdg-notifier`) | the code, one branch and one PR per task, the `README.md` | the task list, reports, notes |
 
-Le fil qui relie les outils est **l'id de la tâche** (`CU-<id>`) : dans les commits, le titre de la PR, les commentaires. Les ids (workspace, espace, dossier, listes, Doc, pages) sont dans `tools/clickup/config.json`.
+The thread that ties the tools together is **the task id** (`CU-<id>`): in commits, PR titles and comments. The ids (workspace, space, folder, lists, Doc, pages) go in `tools/clickup/config.json`.
 
 ## ClickUp
 
 ### Structure
 
-Espace **Projets** → dossier **GDG Notifier** → une liste par grande partie du projet, qui est aussi une zone du code. Plus le Doc du projet dans le dossier. Rien d'autre.
+Space **Projets** → folder **Défi nouveaux** → list **Team B · gdg-notifier**. The code is split into zones, used as prefixes:
 
-| Liste | Zone de code | Préfixe (branche, commit, PR) |
+| Zone | Code | Prefix (branch, commit, PR) |
 |---|---|---|
 | Bot | `src/` | `bot` |
 | Routing | `routing.yaml`, `events.json` | `routing` |
 | Docs | `README.md`, `AGENTS.md` | `docs` |
-| (hors liste) | `.github/`, `.claude/`, `tools/`, `CLAUDE.md` | `outils` |
+| (no list) | `.github/`, `.claude/`, `tools/`, `CLAUDE.md`, `CLAUDE.fr.md` | `outils` |
 
-**Zones partagées** (une tâche ordinaire n'y touche pas ; si c'est nécessaire, le dire dans la fiche et dans la PR) : TODO, `README.md`.
+**Shared zones** (a regular task does not touch them; if it has to, say so in the task and in the PR): TODO, `README.md`.
 
-### Statuts dans un projet de code
+### Statuses in a code project
 
-Ceux de tout le workspace GDG. Ce qui est propre au code :
+The status names are the GDG workspace's, in French. What they mean here:
 
-| Statut | Dans ce projet |
-|---|---|
-| `à faire` | Fiche complète (ci-dessous), échéance posée, dépendances levées. Non assignée : libre |
-| `en cours` | Une branche et un worktree existent, **toujours un assigné** |
-| `bloqué` | Dépendance ClickUp ou commentaire `[BLOQUÉ]` |
-| `en revue` | **Toute tâche de code passe par là** : PR ouverte, `checks` vert, commentaire `[PR]` |
-| `terminé` | PR fusionnée, `[BILAN]` posté. Abandonnée : `[BILAN]` qui dit pourquoi, PR fermée |
+| Status | Meaning | In this project |
+|---|---|---|
+| `à faire` | to do | Complete task sheet (below), dependencies cleared. Unassigned: free to take |
+| `en cours` | in progress | A branch and a worktree exist, **always an assignee** |
+| `bloqué` | blocked | ClickUp dependency or a `[BLOQUÉ]` comment |
+| `en revue` | in review | **Every code task goes through here**: PR open, `checks` green, `[PR]` comment |
+| `terminé` | done | PR merged, `[BILAN]` posted. Dropped: a `[BILAN]` that says why, PR closed |
 
-Les tags sont ceux du GDG : le pôle (`projets` le plus souvent) et, si besoin, un sujet qui traverse plusieurs listes (une fonctionnalité, un client). Jamais un statut ou un type.
+Tags are the GDG's: the team (`projets` most often) and, if needed, a topic that spans several lists (a feature, a client). Never a status or a type.
 
-### Fiche d'une tâche de code (description)
+### Code task sheet (description)
 
 ```
-**Pourquoi** : …
-**Fichiers** : chemins exacts que la tâche crée ou modifie (et seulement ceux-là)
-**Terminé quand** : critères vérifiables, un par ligne
-**Dépend de** : tâches (aussi en dépendance ClickUp)
-**Docs** : pages du Doc à lire (liens), ou « aucune »
-**Pièges** : …
+**Why**: …
+**Files**: exact paths the task creates or edits (and only those)
+**Done when**: checkable criteria, one per line
+**Depends on**: tasks (also as ClickUp dependencies)
+**Docs**: Doc pages to read (links), or "none"
+**Pitfalls**: …
 ```
 
-Les étapes vont dans la checklist de la tâche. Une grosse fonctionnalité est une tâche parente et une sous-tâche par morceau livrable seul (une PR chacune).
+Steps go in the task's checklist. A big feature is a parent task with one subtask per piece that can ship alone (one PR each).
 
-### Commentaires : le journal
+### Comments: the log
 
-Les marqueurs du GDG (`[DÉBUT]`, `[POINT]`, `[BLOQUÉ]`, `[QUESTION]`, `[DÉCISION]`, `[VALIDÉ]`, `[À REVOIR]`, `[BILAN]`), plus, pour le code :
+The GDG markers (`[DÉBUT]` start, `[POINT]` update, `[BLOQUÉ]` blocked, `[QUESTION]`, `[DÉCISION]` decision, `[VALIDÉ]` approved, `[À REVOIR]` changes requested, `[BILAN]` wrap-up), plus, for code:
 
-| Quand | Format |
+| When | Format |
 |---|---|
-| on prend la tâche | `[DÉBUT] branche <prenom>/<zone>-<sujet>, fichiers : …` |
-| PR ouverte | `[PR] #<n> <titre> · checks : vert` |
-| on clôt | `[BILAN] <ce qui a changé> · PR #<n> fusionnée · à surveiller : …` |
+| taking the task | `[DÉBUT] branch <firstname>/<zone>-<topic>, files: …` |
+| PR opened | `[PR] #<n> <title> · checks: green` |
+| closing | `[BILAN] <what changed> · PR #<n> merged · to watch: …` |
 
-Un chiffre (performance, couverture, temps de réponse) cite la commande et le commit qui le reproduisent, sinon il ne compte pas.
+A figure (performance, coverage, response time) cites the command and the commit that reproduce it, otherwise it does not count.
 
-### Assignation et dépendances
+### Assignment and dependencies
 
-- Une tâche `à faire`, non assignée, est libre. On la prend en s'assignant et en passant `en cours`, dans le même appel.
-- Une tâche assignée à quelqu'un d'autre ne se touche pas : `[QUESTION]` pour demander.
-- On lâche une tâche en se désassignant, en la repassant `à faire` et en laissant un `[POINT]` (branche poussée ou non).
-- A attend B : dépendance ClickUp (`POST /task/<A>/dependency` avec `{"depends_on":"<B>"}`) et une ligne dans **Dépend de**.
+- An unassigned task in `à faire` is free. You take it by assigning yourself and moving it to `en cours`, in the same step.
+- A task assigned to someone else is off-limits: ask with a `[QUESTION]`.
+- You drop a task by unassigning yourself, moving it back to `à faire` and leaving a `[POINT]` (branch pushed or not).
+- A waits for B: ClickUp dependency (`POST /task/<A>/dependency` with `{"depends_on":"<B>"}`) and a line in **Depends on**.
 
-### Utiliser l'API
+### Using the API
 
-Pour du volume, l'**API REST** (`tools/clickup/cu.sh`) plutôt que le connecteur MCP (100 appels par jour). La clé vient de `CLICKUP_API_TOKEN`, sinon de `tools/clickup/.env` (ignoré par git, copié dans chaque worktree par `tache.sh`).
+For volume, use the **REST API** (`tools/clickup/cu.sh`) rather than the MCP connector (100 calls per day). The key comes from `CLICKUP_API_TOKEN`, otherwise from `tools/clickup/.env` (ignored by git, copied into each worktree by `tache.sh`).
 
 ```bash
 cu() { sh tools/clickup/cu.sh "$@"; }
-cu GET /user                                              # mon id (pour m'assigner)
-cu GET "/task/<id>?include_markdown_description=true"     # lire une fiche
-cu GET /task/<id>/comment                                  # lire le journal
-cu PUT /task/<id> '{"status":"en cours","assignees":{"add":[<mon id>]}}'
+cu GET /user                                              # my id (to assign myself)
+cu GET "/task/<id>?include_markdown_description=true"     # read a task sheet
+cu GET /task/<id>/comment                                  # read the log
+cu PUT /task/<id> '{"status":"en cours","assignees":{"add":[<my id>]}}'
 cu PUT /task/<id> '{"status":"en revue"}'
 cu POST /task/<id>/comment '{"comment_text":"[PR] …","notify_all":false}'
-cu POST /list/<liste>/task '{"name":"…","markdown_content":"<fiche>","status":"idée"}'
+cu POST /list/<list>/task '{"name":"…","markdown_content":"<sheet>","status":"idée"}'
 cu GET "/v3/workspaces/90122158200/docs/<doc>/pages/<page>?content_format=text/md"
 ```
 
-Le JSON passé à `cu.sh` doit être valide : pour un texte long, le produire avec `python3 -c 'import json; print(json.dumps({...}))'`.
+The JSON passed to `cu.sh` must be valid: for long text, build it with `python3 -c 'import json; print(json.dumps({...}))'`.
 
-## Une session, du début à la fin
+## A session, start to finish
 
-1. **Entrée** : l'humain donne une tâche (id, lien ou nom). Un vrai travail sans tâche : la trouver ou la créer avec son accord. Une simple question ne demande pas de tâche.
-2. **Lire** : la fiche, ses commentaires, sa parente, ses dépendances, les pages du Doc citées.
-3. **Vérifier**, et s'arrêter en le signalant si : la tâche est assignée à quelqu'un d'autre ; elle n'est pas `à faire` (ou `en cours`/`en revue` pour soi) ; une dépendance n'est pas `terminé` ; une autre session écrit les mêmes fichiers (`bash tools/git/tache.sh list`).
-4. **Prendre** : s'assigner, `en cours`, `[DÉBUT]`.
-5. **Travailler** dans son worktree. Toute question à l'humain passe par un QCM. Chaque décision devient un `[DÉCISION]`.
-6. **Finir** : tests verts, push, PR, `checks`, statut `en revue`, `[PR]`. Une fois la PR approuvée par l'autre équipe, son auteur la fusionne.
-7. **Ranger** : supprimer les scripts temporaires et les artefacts de la session. Le worktree reste jusqu'à la fusion.
-8. **Rapport de fin**, toujours dans ce format :
+1. **Input**: the human gives a task (id, link or name). Real work without a task: find it or create it with their agreement. A simple question needs no task.
+2. **Read**: the task sheet, its comments, its parent, its dependencies, the Doc pages it cites.
+3. **Check**, and stop and say so if: the task is assigned to someone else; it is not `à faire` (or `en cours`/`en revue` for yourself); a dependency is not `terminé`; another session is writing the same files (`bash tools/git/tache.sh list`).
+4. **Take**: assign yourself, `en cours`, `[DÉBUT]`.
+5. **Work** in your worktree. Every question to the human is a multiple-choice question. Each decision becomes a `[DÉCISION]`.
+6. **Finish**: tests green, push, PR, `checks`, status `en revue`, `[PR]`. Once the other team has approved the PR, its author merges it.
+7. **Tidy up**: delete the session's temporary scripts and artefacts. The worktree stays until the merge.
+8. **Final report**, always in this format:
 
 ```
-Tâche : <nom> (CU-<id>) · ClickUp : <statut>
-PR : #<n> <lien> · poussée : oui/non · checks : vert / rouge (<étape>)
-Décisions : <une ligne chacune, ou « aucune »>
-Reste : <prochaine étape, ou « rien »>
-Session terminée : oui / non (<pourquoi>)
+Task: <name> (CU-<id>) · ClickUp: <status>
+PR: #<n> <link> · pushed: yes/no · checks: green / red (<step>)
+Decisions: <one line each, or "none">
+Left: <next step, or "nothing">
+Session finished: yes / no (<why>)
 ```
 
 ## GitHub
 
-Plusieurs sessions (humaines ou Claude) tournent en même temps. Le clone principal reste sur `main` : **jamais** de `git switch` ou `git checkout <branche>` dedans.
+Several sessions (humans or Claude) run at the same time. The main clone stays on `main`: **never** `git switch` or `git checkout <branch>` in it.
 
-### Branches et worktrees
+### Branches and worktrees
 
-- Une tâche de code = une branche = un worktree. `bash tools/git/tache.sh new <prenom>/<zone>-<sujet>` (zone : `bot`, `routing`, `docs`, `outils` ; minuscules, tirets, 2–3 mots) crée la branche depuis `origin/main` et son worktree dans `.claude/worktrees/`, et affiche son chemin.
-- Entrer dans ce worktree (outil `EnterWorktree`, ou lancer `claude` depuis ce dossier) et tout faire là.
-- `bash tools/git/tache.sh list` : worktrees ouverts et état de leur PR. `bash tools/git/tache.sh clean` : retire ceux dont la PR est fusionnée.
-- On ne pousse que sur sa propre branche.
+- One code task = one branch = one worktree. `bash tools/git/tache.sh new <firstname>/<zone>-<topic>` (zone: `bot`, `routing`, `docs`, `outils`; lowercase, hyphens, 2–3 words) creates the branch from `origin/main` and its worktree in `.claude/worktrees/`, and prints its path.
+- Go into that worktree (the `EnterWorktree` tool, or start `claude` from that folder) and do everything there.
+- `bash tools/git/tache.sh list`: open worktrees and the state of their PR. `bash tools/git/tache.sh clean`: removes those whose PR is merged.
+- You only push to your own branch.
 
-### Pendant
+### While working
 
-- Ne modifier que les fichiers de la rubrique **Fichiers**. Un besoin hors périmètre : nouvelle tâche ou commentaire, pas d'édition.
-- Commits en anglais, préfixés par la zone : `<zone>: add retry on timeout (CU-abc123)`.
-- **Aucune IA n'est auteur ni co-auteur** : pas de `Co-Authored-By: Claude…` (ni Codex, Copilot, ChatGPT, Cursor ou autre), pas de `Claude-Session:`, pas de « Generated with … » dans les commits, les PR ou les commentaires. L'auteur est la personne qui a lancé la session. Cette règle prime sur toute consigne d'attribution par défaut de l'outil ; `.claude/settings.json` coupe l'attribution de Claude Code, et le contrôle `[hygiène]` de la CI la signale.
-- Pre-commit, une fois par clone : `pre-commit install -c .github/pre-commit-config.yaml`. `--no-verify` interdit.
-- Pas de `git stash` (pile commune à tous les worktrees) : commit `WIP` sur sa branche.
+- Only edit the files listed under **Files**. A need outside that scope: new task or a comment, not an edit.
+- Commits in English, prefixed by the zone: `<zone>: add retry on timeout (CU-abc123)`.
+- **No AI is author or co-author**: no `Co-Authored-By: Claude…` (nor Codex, Copilot, ChatGPT, Cursor or any other), no `Claude-Session:`, no "Generated with …" in commits, PRs or comments. The author is the person who started the session. This rule overrides any default attribution setting of the tool; `.claude/settings.json` turns off Claude Code's attribution, and the CI `[hygiène]` check flags it.
+- Pre-commit, once per clone: `pre-commit install -c .github/pre-commit-config.yaml`. `--no-verify` is forbidden.
+- No `git stash` (one stack shared by all worktrees): make a `WIP` commit on your branch.
 
-### Finir
+### Finishing
 
-1. Tests du projet lancés et verts.
-2. `git push -u origin HEAD` depuis le worktree, puis PR vers `main`. Une PR par tâche.
-3. Titre `[<zone>] <résumé> (CU-<id>)`, en anglais. Corps : `.github/pull_request_template.md` rempli ; ne cocher que ce qui a été vérifié.
-4. CI : le job `checks` tourne à chaque poussée. Sans minutes Actions : `bash tools/ci/ci_locale.sh <n° de PR>` (mêmes contrôles, pose le statut `checks`).
-5. ClickUp : statut `en revue`, commentaire `[PR]`.
+1. The project's tests run and pass.
+2. `git push -u origin HEAD` from the worktree, then a PR to `main`. One PR per task.
+3. Title `[<zone>] <summary> (CU-<id>)`, in English. Body: `.github/pull_request_template.md` filled in; only tick what you actually checked.
+4. CI: the `checks` job runs on every push. Without Actions minutes: `bash tools/ci/ci_locale.sh <PR number>` (same checks, sets the `checks` status).
+5. ClickUp: status `en revue`, `[PR]` comment.
 
-### Fusion
+### Merging
 
-`main` se fusionne par PR, en squash seul, avec `checks` vert et l'approbation d'un membre de l'autre équipe (`[VALIDÉ]` ou `[À REVOIR]`). L'auteur de la PR la fusionne lui-même (ou un agent, sur sa demande explicite), passe la tâche `terminé` avec son `[BILAN]`, puis `bash tools/git/tache.sh clean`. Conflit : `git fetch origin main && git rebase origin/main` dans le worktree, `git push --force-with-lease`.
+`main` is only updated through PRs, squash only, with `checks` green and an approval from a member of the other team (`[VALIDÉ]` or `[À REVOIR]`). The PR's author merges it themselves (or an agent, at their explicit request), moves the task to `terminé` with its `[BILAN]`, then runs `bash tools/git/tache.sh clean`. Conflict: `git fetch origin main && git rebase origin/main` in the worktree, then `git push --force-with-lease`.
 
-Sur un dépôt privé de l'organisation GDG-EPITA (plan Free), GitHub n'applique pas la protection de `main` : ces règles tiennent par discipline, et `checks` reste obligatoire avant toute fusion.
+This repo is public: GitHub enforces the protection of `main` (PR, one approval, `checks` green, no force-push).
 
-### Valider une PR
+### Validating a PR
 
-Sur demande : lancer le sous-agent **`verificateur`** sur la PR et poster son rapport en un seul commentaire GitHub (`<!-- verification -->`). Verdict RÉGRESSION ou TOURNE EN ROND : pas de fusion. Le verdict va aussi en commentaire sur la tâche.
+On request: run the **`verificateur`** subagent on the PR and post its report as a single GitHub comment (`<!-- verification -->`). Verdict REGRESSION or GOING IN CIRCLES: no merge. The verdict also goes as a comment on the task.
 
-## Jamais pour un agent
+## Never, for an agent
 
-- Fusionner une PR ou passer une tâche `terminé` sans demande explicite.
-- Mettre une IA (Claude, Codex, Copilot…) en auteur ou co-auteur d'un commit, d'une PR ou d'un commentaire.
-- Prendre une tâche assignée à quelqu'un d'autre, ou travailler sans être assigné.
-- Ajouter un `.md` de documentation, de rapport ou de notes dans le dépôt, ou écrire de l'état dans ce fichier.
-- Laisser un script temporaire dans le dépôt.
-- `push --force` sans `--with-lease`, ou sur une branche qui n'est pas la sienne ; modifier les réglages du dépôt ou du ClickUp (statuts, listes, tags, membres).
-- Mettre une clé, un mot de passe ou des données personnelles du client dans le code, un commit, une tâche ou un commentaire.
-- Créer plus de 3 tâches ClickUp sans accord.
+- Merge a PR or move a task to `terminé` without an explicit request.
+- List an AI (Claude, Codex, Copilot…) as author or co-author of a commit, a PR or a comment.
+- Take a task assigned to someone else, or work without being assigned.
+- Add a documentation, report or notes `.md` to the repo (unless a task asks for it, like `AGENTS.md`), or write state into this file.
+- Leave a temporary script in the repo.
+- `push --force` without `--with-lease`, or on a branch that is not yours; change the repo or ClickUp settings (statuses, lists, tags, members).
+- Put a key, a password or personal data in the code, a commit, a task or a comment.
+- Create more than 3 ClickUp tasks without agreement.
